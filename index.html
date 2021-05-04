@@ -77,6 +77,33 @@
         </table>
     </section>
     </main>
+
+    <div class="modal-overlay active"> <!--Caixa transparente-->
+        <div class="modal"><!--Caixa Branca-->
+            <div id="form"><!--Conteúdo-->
+                <h2>Nova Transação</h2>
+                <form action="">
+                    <div class="input-group">
+                        <label  class="sr-only" for="description">Descrição</label>
+                        <input type="text" name="description" id="description" placeholder="Descrição">
+                    </div>
+                    <div class="input-group">
+                        <label  class="sr-only" for="amount">Valor</label>
+                        <input type="number" name="amount" id="amount" placeholder="0,00" step="0.01">
+                        <small class="help">Use o sinal - (Negativo) Para despesas e , (Virgula) para casas decimais</small>
+                    </div>
+                    <div class="input-group">
+                        <label  class="sr-only" for="date">Data</label>
+                        <input type="date" name="date" id="date">
+                    </div>
+                    <div class="input-group actions">
+                        <a href="#" class="button cancel">Cancelar</a>
+                        <button>Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
         <footer>
             <p>Dev.Finance$</p>
         </footer>
