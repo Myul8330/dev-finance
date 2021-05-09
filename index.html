@@ -38,7 +38,9 @@
     </section>
     <section id="transaction">
         <h2 class="sr-only">Transações</h2>
-        <a href="#" class="buttom new">+ Nova Transação</a>
+        <a href="#"
+        onclick="Modal.open()"
+         class="buttom new">+ Nova Transação</a>
         <table id="data-table">
                 <thead>
                         <tr>
@@ -78,7 +80,7 @@
     </section>
     </main>
 
-    <div class="modal-overlay active"> <!--Caixa transparente-->
+    <div class="modal-overlay"> <!--Caixa transparente-->
         <div class="modal"><!--Caixa Branca-->
             <div id="form"><!--Conteúdo-->
                 <h2>Nova Transação</h2>
@@ -97,7 +99,9 @@
                         <input type="date" name="date" id="date">
                     </div>
                     <div class="input-group actions">
-                        <a href="#" class="button cancel">Cancelar</a>
+                        <a href="#"
+                        onclick="Modal.close()"
+                        class="button cancel">Cancelar</a>
                         <button>Salvar</button>
                     </div>
                 </form>
@@ -107,5 +111,24 @@
         <footer>
             <p>Dev.Finance$</p>
         </footer>
+        <script>
+            const Modal = {
+                open(){
+                    //Abrir Modal
+                    //Adicionar a class active ao 
+                    document
+                            .querySelector('.modal-overlay')
+                            .classList.add('active');
+
+                },
+                close(){
+                        //fecha o modal
+                        //remove a class active do modal
+                        document
+                            .querySelector('.modal-overlay')
+                            .classList.remove('active');
+                }
+            }
+        </script>
 </body>
 </html>
