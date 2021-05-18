@@ -50,6 +50,7 @@ const Transaction = {
     all:  transactions,//Agrupando o transactions! para guarda no navegador.
     add(transaction){
         Transaction.all.push(transaction)
+        App.reload()
     },
     incomes() {
         let income   = 0;
@@ -116,6 +117,9 @@ const DOM = {
         document
             .getElementById('totalDisplay')
             .innerHTML = Utils.formatCurrency(Transaction.total())
+    },
+    clearTransactions() {
+        DOM.transactionsContainer.innerHTML = ""
     }
 }
 
@@ -133,21 +137,16 @@ const Utils = {
 }
 
 const App = {
-    init() {
-        
-    },
-    reload() {},
-}
- 
-transactions.forEach(function(transaction){
-    DOM.addTransaction(transaction)
-})
+    init() { 
+        Transaction.all.forEach(transaction => {
+            DOM.addTransaction(transaction)
+        })
 
-DOM.updateBalance()
-/*Transaction.add({
-    id: 39,
-    description: 'alo',
-    amount: 20000,
-    date: '23/01/2021'
-})*/
-console.log(transaction.html)
+        DOM.updateBalance()
+    },
+    reload() {
+        DOM.clearTransactions()
+        App.init()
+    },
+}
+App.init()
