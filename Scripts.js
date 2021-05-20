@@ -16,40 +16,38 @@ const Modal = {
                 .remove('active');
     }
 }
-const transactions = [
-    {
-        id: 1, 
-        description: 'Luz',
-        amount: -50000,
-        date: '23/01/2021',
-},
-    {
-        id: 2, 
-        description: 'Criação website',
-        amount: 500000,
-        date: '23/01/2021',
-},
-    {
-        id: 3, 
-        description: 'Internet',
-        amount: -20000,
-        date: '23/01/2021',
-},
-    {
-        id: 4, 
-        description: 'APP',
-        amount: 20000,
-        date: '23/01/2021',
-},
-
-]
 //Eu preciso somar as entradas
 //depois eu preciso somar as saídas e
 //remover das entradas o valor das saídas
 const Transaction = {
-    all:  transactions,//Agrupando o transactions! para guarda no navegador.
+    all:  [
+        {
+            description: 'Luz',
+            amount: -50000,
+            date: '23/01/2021',
+    },
+        {
+            description: 'Criação website',
+            amount: 500000,
+            date: '23/01/2021',
+    },
+        {
+            description: 'Internet',
+            amount: -20000,
+            date: '23/01/2021',
+    },
+        {
+            description: 'APP',
+            amount: 20000,
+            date: '23/01/2021',
+    },
+    ],//Agrupando o transactions! para guarda no navegador.
     add(transaction){
         Transaction.all.push(transaction)
+        App.reload()
+    },
+    remove(index) {
+        Transaction.all.splice(index, 1)
         App.reload()
     },
     incomes() {
@@ -124,6 +122,9 @@ const DOM = {
 }
 
 const Utils = { 
+    formatAmount(value) {
+        value = Number(value) * 100
+    },
     formatCurrency(value) {
         const signal = Number(value)  <  0  ?  "-" : ""
         value = String(value).replace(/\D/g, "")
@@ -133,6 +134,44 @@ const Utils = {
             currency: "BRL"
         })
         return signal + value
+    }
+}
+const form = {
+    description: document.querySelector('input#description'),
+    amount: document.querySelector('input#amount'),
+    date: document.querySelector('input#date'),
+    getValues() {
+        return{
+            description: form.description.value,
+            amount: form.amount.value,
+            date: form.date.value
+        }
+    },
+    validateFields(){
+        const {description, amount, date} = form.getValues()
+        if(description.trim() === "" || amount.trim() === "" || date.trim() === "") {
+            throw new Error("Por favor, preencha todos os campos")
+        }
+    },
+    formatValues(){
+        let {description, amount, date} = form.getValues()
+        amount = util.formatAmount(amount)
+    },
+    submit(event) {
+        event.preventDefault()
+
+        try {
+             //verificar se todas as informaçoes foram preenchidas
+            form.validateFields()
+            //formata os dados para salvar
+            form.formatValues()
+            // salvar
+            //apagar os dados do formulario
+            //modal feche
+            //Atualizar a aplicaçao
+        } catch (error) {
+            alert(error.message)
+        }
     }
 }
 
